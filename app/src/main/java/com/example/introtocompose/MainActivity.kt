@@ -1,8 +1,10 @@
 package com.example.introtocompose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,7 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             IntroToComposeTheme {
-                MyApp()
+               MyApp()
             }
         }
     }
@@ -42,12 +46,14 @@ fun CreateCircle() {
     Card(
         modifier = Modifier
             .padding(3.dp)
-            .size(45.dp),
-        shape = RectangleShape
+            .size(150.dp)
+            .clickable {
+                Log.d("Tap", "Circle: Tap")
+            },
+        shape = CircleShape,
     ) {
         Box(contentAlignment = Alignment.Center) {
-            Text("タップしてね", modifier = Modifier.size(15.dp))
-
+            Text("Tap", modifier = Modifier)
         }
     }
 }
@@ -56,18 +62,12 @@ fun CreateCircle() {
 fun MyApp() {
     Surface(
         modifier = Modifier
-            .fillMaxHeight()
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .fillMaxHeight(),
         color = Color(0xFF546E7A)
     ) {
-        Text("Hello")
+        CreateCircle()
     }
-}
-
-@Preview
-@Composable
-fun showAge(age: Int = 12) {
-    Text(text = age.toString())
 }
 
 
